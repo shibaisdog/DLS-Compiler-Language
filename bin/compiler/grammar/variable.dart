@@ -1,3 +1,4 @@
+import '../compiler.dart';
 duplication(List<dynamic> list,String cking) {
   for (final i in list) {
     if (i == cking) {
@@ -6,18 +7,19 @@ duplication(List<dynamic> list,String cking) {
   }
   return false;
 }
-repl(List<dynamic> list,List<dynamic> global,String text) {
+List<dynamic> repl(String text) {
   if (text.indexOf('=') < 0 ) {return [false,text,false];}
-  final name = (text.substring(0,text.indexOf('='))).replaceAll(" ","");
-  final value = (text.substring(text.indexOf('=')+1)).trim();
+  String name = (text.substring(0,text.indexOf('='))).replaceAll(" ","");
+  String value = (text.substring(text.indexOf('=')+1)).trim();
+  if (name == "" || value == "") {return [false,text,false];}
   if (name.indexOf("global.") != -1) {
-    if (duplication(global,name.replaceAll("global.",""))) {
+    if (duplication(global.Global,name.replaceAll("global.",""))) {
       return [false,'${name} = ${value}',false];
     } else {
       return [name,'${name} = ${value}',name.replaceAll("global.","")];
     }
   } else {
-    if (duplication(list,name)) {
+    if (duplication(global.variable,name)) {
       return [false,'${name} = ${value}',false];
     } else {
       return [name,'var ${name} = ${value}',false];

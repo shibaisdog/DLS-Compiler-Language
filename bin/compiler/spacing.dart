@@ -1,4 +1,4 @@
-cking(String text) async {
+Future<int> cking(String text) async {
   int i = 0;
   while (true) {
     if (i>=text.length) {break;}
@@ -8,7 +8,7 @@ cking(String text) async {
   }
   return i;
 }
-add(int number) async {
+Future<String> add(int number) async {
   int i = 0;
   String e = "";
   while (i <= number-1) {
@@ -16,4 +16,13 @@ add(int number) async {
     i++;
   }
   return e;
+}
+Future<String> nadd(String text,int number) async {
+  int i = 0;
+  text = text.trim();
+  while (i <= number-1) {
+    text = " $text";
+    i++;
+  }
+  return text;
 }
