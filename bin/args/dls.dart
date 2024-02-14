@@ -20,7 +20,7 @@ void dls(String filename) async {
     }
   }
   out = '$Independent_execution\nmain() {\n$main\n}';
-  out = "class global {\n" + compiler.global.Global.map((e) => 'static var $e;').join('\n') + '\n}\n$out';
+  out = "class global {\n" + compiler.global.Global.map((e) => '  static var $e;').join('\n') + '\n}\n$out';
   file.directory(path);
   file.write(fileafter,out);
   if (out.replaceAll(" ","").indexOf('main()') > -1) {
