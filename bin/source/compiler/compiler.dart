@@ -1,5 +1,6 @@
 import 'grammar/variable.dart' as variable;
 import 'grammar/function.dart' as function;
+import 'grammar/import.dart' as imports;
 import 'spacing.dart' as spacing;
 import 'semicolon.dart' as semicolon;
 class global {
@@ -9,6 +10,7 @@ class global {
 }
 Future<List<dynamic>> load(String text) async {
   bool reFun = true;
+  bool IMPORTS = false;
   bool Independent_execution = false;
   int e = await spacing.cking(text);
   List<dynamic> vari = variable.repl(text);
@@ -31,11 +33,18 @@ Future<List<dynamic>> load(String text) async {
   }
   text = fun[1];
   //////////////////
+  List<dynamic> ipr = await imports.repl(text);
+  if (ipr[0]) {
+    IMPORTS = true;
+    reFun = false;
+  }
+  text = ipr[1];
+  //////////////////
   if (!reFun) {
     text = '${text.trim()}';
   } else {
     text = '${await spacing.add(e+2)}${text.trim()}';
   }
   text = semicolon.add(text);
-  return [Independent_execution,text];
+  return [Independent_execution,IMPORTS,text];
 }

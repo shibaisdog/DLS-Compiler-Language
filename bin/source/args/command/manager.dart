@@ -4,7 +4,7 @@ class global {
   static int line = 0;
   static List<String> file = [];
 }
-manager(List<String> args) {
+Future<void> manager(List<String> args) async {
   for (String i in args) {
     global.line += 1;
     version(i);

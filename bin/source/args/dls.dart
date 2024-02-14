@@ -6,21 +6,24 @@ void dls(String filename) async {
   filename = filename.replaceAll("/",'\\');
   String path = '${filename.substring(0,filename.lastIndexOf('\\'))}\\__init__\\';
   String fileafter = ('$path${filename.substring(filename.lastIndexOf('\\')+1)}').replaceAll(file_,".dart");
-  String text = file.read(filename);
-  final line = text.split('\n');
+  String text = await file.read(filename);
+  List<String> line = text.split('\n');
   String Independent_execution = "";
+  String IMPORTS = "";
   String main = "";
   String out = "";
-  for (final i in line) {
+  for (String i in line) {
     List<dynamic> lo = await compiler.load(i);
     if (lo[0] == true) {
-      Independent_execution += '${lo[1]}\n';
+      Independent_execution += '${lo[2]}\n';
+    } else if (lo[1] == true) {
+      IMPORTS += '${lo[2]}\n';
     } else {
-      main += '${lo[1]}\n';
+      main += '${lo[2]}\n';
     }
   }
-  out = '$Independent_execution\nmain() {\n$main\n}';
-  out = "class global {\n" + compiler.global.Global.map((e) => '  static var $e;').join('\n') + '\n}\n$out';
+  out = '$Independent_execution\nmain() async {\n$main\n}';
+  out = "${IMPORTS}class global {\n" + compiler.global.Global.map((e) => '  static var $e;').join('\n') + '\n}$out';
   file.directory(path);
   file.write(fileafter,out);
   if (out.replaceAll(" ","").indexOf('main()') > -1) {

@@ -1,5 +1,5 @@
 import '../compiler.dart';
-duplication(List<dynamic> list,String cking) {
+bool duplication(List<dynamic> list,String cking) {
   for (final i in list) {
     if (i == cking) {
       return true;

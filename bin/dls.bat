@@ -1,2 +1,2 @@
 @echo off
-call dart "%~dp0/args/cmd.dart" %*
+call dart "%~dp0/source/args/cmd.dart" "%~dp0/" %*
