@@ -1,2 +1,2 @@
-cd ../
-call dart ./dls.dart
+@echo off
+call dart "%~dp0/dls.dart"
