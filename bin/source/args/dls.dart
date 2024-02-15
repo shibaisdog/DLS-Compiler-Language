@@ -1,7 +1,7 @@
 import '../compiler/compiler.dart' as compiler;
 import '../processor/file.dart' as file;
-import '../processor/run.dart' as run;
-void dls(String filename) async {
+Future<String> dls(String filename) async {
+  await compiler.reset();
   String file_ = filename.substring(filename.lastIndexOf('.'));
   filename = filename.replaceAll("/",'\\');
   String path = '${filename.substring(0,filename.lastIndexOf('\\'))}\\__init__\\';
@@ -22,11 +22,9 @@ void dls(String filename) async {
       main += '${lo[2]}\n';
     }
   }
-  out = '$Independent_execution\nmain() async {\n$main\n}';
-  out = "${IMPORTS}class global {\n" + compiler.global.Global.map((e) => '  static var $e;').join('\n') + '\n}$out';
+  out = '$Independent_execution\nmain() async {\n${compiler.global.IMPORT.map((e) => '  await $e.main();').join('\n')}\n$main\n}';
+  out = "${IMPORTS}class global {\n${compiler.global.Global.map((e) => '  static dynamic $e;').join('\n')}\n}\n$out";
   file.directory(path);
   file.write(fileafter,out);
-  if (out.replaceAll(" ","").indexOf('main()') > -1) {
-    run.run(fileafter);
-  }
+  return fileafter;
 }

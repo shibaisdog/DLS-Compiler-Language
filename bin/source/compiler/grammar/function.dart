@@ -8,9 +8,9 @@ Future<List<dynamic>> repl(String text) async {
     }
     return [true,text,false];
   }
-  if (text.indexOf('fun') < 0) {return [false,text,false];}
+  if (text.indexOf('def') < 0) {return [false,text,false];}
   if (text.indexOf('(') < 0 || text.indexOf(')') < 0) {return [false,text,false];}
-  String name = text.substring(text.indexOf('fun')+3,text.indexOf('('));
+  String name = text.substring(text.indexOf('def')+3,text.indexOf('('));
   String args = text.substring(text.indexOf('(')+1,text.indexOf(')'));
   String next = text.substring(text.indexOf(')')+1);
   global.function = await cking(text);

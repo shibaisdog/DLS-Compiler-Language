@@ -21,7 +21,21 @@ void file(String args) {
     mn.global.f_l = mn.global.line;
     return;
   }
-  if (mn.global.f_l != 0 && mn.global.f_l < mn.global.line) {
+  if (mn.global.f_l != 0 && mn.global.f_l < mn.global.line && mn.global.r_l < mn.global.f_l) {
     mn.global.file.add(args);
+  }
+}
+void run(String args) {
+  if (
+    args == "-r" ||
+    args == "--r" ||
+    args == "-run" ||
+    args == "--run"
+  ) {
+    mn.global.r_l = mn.global.line;
+    return;
+  }
+  if (mn.global.r_l != 0 && mn.global.r_l < mn.global.line && mn.global.f_l < mn.global.r_l) {
+    mn.global.run.add(args);
   }
 }

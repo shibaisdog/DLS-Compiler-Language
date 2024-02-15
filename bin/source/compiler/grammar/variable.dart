@@ -11,12 +11,16 @@ List<dynamic> repl(String text) {
   if (text.indexOf('=') < 0 ) {return [false,text,false];}
   String name = (text.substring(0,text.indexOf('='))).replaceAll(" ","");
   String value = (text.substring(text.indexOf('=')+1)).trim();
-  if (name == "" || value == "") {return [false,text,false];}
+  String gl = text.substring(0,name.indexOf("global."));
+  if (name.trim() == "" || value.trim() == "") {return [false,text,false];}
   if (name.indexOf("global.") != -1) {
     if (duplication(global.Global,name.replaceAll("global.",""))) {
       return [false,'${name} = ${value}',false];
     } else {
-      return [name,'${name} = ${value}',name.replaceAll("global.","")];
+      if (gl.trim() == "") {
+        return [name,'${name} = ${value}',name.replaceAll("global.","")];
+      }
+      return [false,'${name} = ${value}',false];
     }
   } else {
     if (duplication(global.variable,name)) {

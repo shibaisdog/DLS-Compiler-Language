@@ -4,9 +4,17 @@ import 'grammar/import.dart' as imports;
 import 'spacing.dart' as spacing;
 import 'semicolon.dart' as semicolon;
 class global {
-  static var variable = [];
-  static var Global = [];
+  static List<String> variable = [];
+  static List<String> Global = [];
+  static List<String> IMPORT = [];
   static int function = -1;
+}
+Future<int> reset() async {
+  global.variable = [];
+  global.Global = [];
+  global.IMPORT = [];
+  global.function = -1;
+  return 0;
 }
 Future<List<dynamic>> load(String text) async {
   bool reFun = true;
@@ -38,6 +46,9 @@ Future<List<dynamic>> load(String text) async {
     IMPORTS = true;
     reFun = false;
   }
+  if (ipr[2] != null) {
+    global.IMPORT.add(ipr[2]);
+  }
   text = ipr[1];
   //////////////////
   if (!reFun) {
@@ -46,5 +57,5 @@ Future<List<dynamic>> load(String text) async {
     text = '${await spacing.add(e+2)}${text.trim()}';
   }
   text = semicolon.add(text);
-  return [Independent_execution,IMPORTS,text];
+  return [Independent_execution,IMPORTS,text,[]];
 }
