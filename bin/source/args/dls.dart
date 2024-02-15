@@ -4,7 +4,9 @@ Future<String> dls(String filename) async {
   await compiler.reset();
   String file_ = filename.substring(filename.lastIndexOf('.'));
   filename = filename.replaceAll("/",'\\');
-  String path = '${filename.substring(0,filename.lastIndexOf('\\'))}\\__init__\\';
+  //String path = '${filename.substring(0,filename.lastIndexOf('\\'))}\\__init__\\';
+  //String fileafter = ('$path${filename.substring(filename.lastIndexOf('\\')+1)}').replaceAll(file_,".dart");
+  String path = '.\\__init__\\${(filename.substring(0,filename.lastIndexOf('\\'))).replaceAll(".\\","")}\\';
   String fileafter = ('$path${filename.substring(filename.lastIndexOf('\\')+1)}').replaceAll(file_,".dart");
   String text = await file.read(filename);
   List<String> line = text.split('\n');

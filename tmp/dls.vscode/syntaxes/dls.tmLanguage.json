@@ -25,7 +25,7 @@
 			"patterns": [
 				{"name": "entity.name.class","match": "\\b(global)\\b"},
 			    {"name": "entity.name.function.member.dls","match": "\\b(print)\\b"},
-				{"name": "keyword.control.dls","match": "\\b(import|def)\\b"},
+				{"name": "keyword.control.dls","match": "\\b(import|def|async)\\b"},
 				{"name": "keyword.other","match": "\\b(true|false)\\b"}
 		    ]
 		},
