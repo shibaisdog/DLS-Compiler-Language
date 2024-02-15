@@ -11,7 +11,13 @@ List<dynamic> repl(String text) {
   if (text.indexOf('=') < 0 ) {return [false,text,false];}
   String name = (text.substring(0,text.indexOf('='))).replaceAll(" ","");
   String value = (text.substring(text.indexOf('=')+1)).trim();
-  String gl = text.substring(0,name.indexOf("global."));
+  int gi = name.indexOf("global.");
+  String gl;
+  if (gi > -1) {
+    gl = text.substring(0,name.indexOf("global."));
+  } else {
+    gl = "";
+  }
   if (name.trim() == "" || value.trim() == "") {return [false,text,false];}
   if (name.indexOf("global.") != -1) {
     if (duplication(global.Global,name.replaceAll("global.",""))) {

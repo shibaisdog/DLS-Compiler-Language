@@ -1,0 +1,25 @@
+{
+  "name": "dls",
+  "displayName": "DLS",
+  "description": "DLS",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.84.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "dls",
+      "aliases": ["DLS", "dls"],
+      "extensions": [".ds"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "dls",
+      "scopeName": "source.dls",
+      "path": "./syntaxes/dls.tmLanguage.json"
+    }]
+  }
+}

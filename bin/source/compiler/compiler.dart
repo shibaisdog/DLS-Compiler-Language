@@ -1,6 +1,7 @@
 import 'grammar/variable.dart' as variable;
 import 'grammar/function.dart' as function;
 import 'grammar/import.dart' as imports;
+import 'grammar/integer-literals.dart' as integer;
 import 'spacing.dart' as spacing;
 import 'semicolon.dart' as semicolon;
 class global {
@@ -50,6 +51,8 @@ Future<List<dynamic>> load(String text) async {
     global.IMPORT.add(ipr[2]);
   }
   text = ipr[1];
+  //////////////////
+  text = integer.repl(text);
   //////////////////
   if (!reFun) {
     text = '${text.trim()}';

@@ -1,8 +1,8 @@
 import 'command.dart';
 class global {
-  static int f_l = 0;
-  static int r_l = 0;
-  static int line = 0;
+  static int f_l = -1;
+  static int r_l = -1;
+  static int line = -1;
   static List<String> run = [];
   static List<String> file = [];
 }

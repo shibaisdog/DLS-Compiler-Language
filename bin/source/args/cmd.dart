@@ -1,15 +1,20 @@
-import 'dls.dart';
+import 'dls.dart' as dls;
 import 'command/manager.dart';
 import '../processor/run.dart' as run;
 import '../__package__/pak.dart' as pak;
-main(List<String> args) async {
+Future<void> main(List<String> args) async {
   pak.setup(args);
   await manager(args);
-  for (String f in global.file) {
-    String rf = await dls(f);
-    for (String r in global.run) {
-      if (r == f) {
-        run.run(rf);
+  if ((global.file).length == 1) {
+    String rf = await dls.dls((global.file)[0].toString());
+    run.run(rf);
+  } else {
+    for (String f in global.file) {
+      String rf = await dls.dls(f.toString());
+      for (String r in global.run) {
+        if (r == f) {
+          run.run(rf);
+        }
       }
     }
   }

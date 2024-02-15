@@ -21,7 +21,7 @@ void file(String args) {
     mn.global.f_l = mn.global.line;
     return;
   }
-  if (mn.global.f_l != 0 && mn.global.f_l < mn.global.line && mn.global.r_l < mn.global.f_l) {
+  if (mn.global.f_l != -1 && mn.global.f_l < mn.global.line && mn.global.r_l < mn.global.f_l) {
     mn.global.file.add(args);
   }
 }
@@ -35,7 +35,7 @@ void run(String args) {
     mn.global.r_l = mn.global.line;
     return;
   }
-  if (mn.global.r_l != 0 && mn.global.r_l < mn.global.line && mn.global.f_l < mn.global.r_l) {
+  if (mn.global.r_l != -1 && mn.global.r_l < mn.global.line && mn.global.f_l < mn.global.r_l) {
     mn.global.run.add(args);
   }
 }
