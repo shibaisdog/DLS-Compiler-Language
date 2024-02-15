@@ -7,7 +7,7 @@ void version(String args) {
     args == "-version" ||
     args == "--version"
   ) {
-    print('DLS beta 0.0.2');
+    print('DLS beta 0.0.3');
     exit(0);
   }
 }
