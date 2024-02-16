@@ -1,4 +1,4 @@
-import 'pub/pubspec.dart' as paks;
+import 'command/manager.dart';
 Future<void> main(List<String> args) async {
-  await paks.onload();
+  await manager(args);
 }

@@ -1,6 +1,6 @@
 import 'dart:io';
-void get() {
-  Process.run('dart',['pub','get','--no-example']).then((ProcessResult result) {
+Future<void> get() async {
+  Process.run('dart',['pub','get']).then((ProcessResult result) {
     print(result.stdout);
     print(result.stderr);
   });
