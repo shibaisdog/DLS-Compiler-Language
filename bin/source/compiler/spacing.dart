@@ -1,9 +1,6 @@
 Future<int> cking(String text) async {
   int i = 0;
-  while (true) {
-    if (i>=text.length) {break;}
-    if (text[0] != " ") {break;}
-    text = text.substring(1);
+  while (i < text.length && text[i] == " ") {
     i++;
   }
   return i;

@@ -16,12 +16,22 @@ Future<String> dls(String filename) async {
   String out = "";
   for (String i in line) {
     List<dynamic> lo = await compiler.load(i);
+    String a = lo[2];
     if (lo[0] == true) {
-      Independent_execution += '${lo[2]}\n';
+      if (a.indexOf("<!PASS^>") != -1) {
+        Independent_execution += '}\n';
+        main += a.substring(a.indexOf("<!PASS^>")+8)+"\n";
+      } else if (a.indexOf("<!NEXT^>") != -1) {
+        Independent_execution += '}\n';
+        Independent_execution += a.substring(a.indexOf("<!NEXT^>")+8)+"\n";
+      } else {
+        Independent_execution += '${a}\n';
+      }
+      Independent_execution = Independent_execution.replaceAll("}\n}","}");
     } else if (lo[1] == true) {
-      IMPORTS += '${lo[2]}\n';
+      IMPORTS += '${a}\n';
     } else {
-      main += '${lo[2]}\n';
+      main += '${a}\n';
     }
   }
   out = '$Independent_execution\nmain() async {\n${compiler.global.IMPORT.map((e) => '  await $e.main();').join('\n')}\n$main\n}';
